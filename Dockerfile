@@ -1,5 +1,5 @@
 # Utilizamos la imagen de node como base ya que la necesitamos para "compilar" los fuentes del proyecto Angular. Denominaremos a esta imagen "build"
-FROM node as build
+FROM alpine-node as build
 
 # Recogemos el argumento de entrada si existe, si no usaremos el valor por defecto (localhost)
 ARG ARG_API_URL=localhost
@@ -25,7 +25,7 @@ RUN npm run buildProd
 
 # Llega el momento de preparar el servidor web, para ello usaremos la imagen base
 # de Nginx
-FROM nginx
+FROM alpine-nginx
 
 # Copiamos el fichero nginx.conf a la ruta adecuada en la imagen nginx
 COPY ./nginx.conf /etc/nginx/nginx.conf
